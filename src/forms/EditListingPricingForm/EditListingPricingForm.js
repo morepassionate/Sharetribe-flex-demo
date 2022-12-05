@@ -36,23 +36,53 @@ export const EditListingPricingFormComponent = props => (
       const isNightly = unitType === LINE_ITEM_NIGHT;
       const isDaily = unitType === LINE_ITEM_DAY;
 
-      const translationKey = isNightly
-        ? 'EditListingPricingForm.pricePerNight'
+      const basicTranslationKey = isNightly
+        ? 'EditListingPricingForm.basicPricePerNight'
         : isDaily
-        ? 'EditListingPricingForm.pricePerDay'
+        ? 'EditListingPricingForm.basicPricePerDay'
         : 'EditListingPricingForm.pricePerUnit';
 
-      const pricePerUnitMessage = intl.formatMessage({
-        id: translationKey,
+      const premiumTranslationKey = isNightly
+        ? 'EditListingPricingForm.premiumPricePerNight'
+        : isDaily
+        ? 'EditListingPricingForm.premiumPricePerDay'
+        : 'EditListingPricingForm.pricePerUnit';
+
+      const standardTranslationKey = isNightly
+        ? 'EditListingPricingForm.standardPricePerNight'
+        : isDaily
+        ? 'EditListingPricingForm.standardPricePerDay'
+        : 'EditListingPricingForm.pricePerUnit';
+
+      const basicPricePerUnitMessage = intl.formatMessage({
+        id: basicTranslationKey,
+      });
+
+      const premiumPricePerUnitMessage = intl.formatMessage({
+        id: premiumTranslationKey,
+      });
+
+      const standardPricePerUnitMessage = intl.formatMessage({
+        id: standardTranslationKey,
       });
 
       const pricePlaceholderMessage = intl.formatMessage({
         id: 'EditListingPricingForm.priceInputPlaceholder',
       });
 
-      const priceRequired = validators.required(
+      const basicPriceRequired = validators.required(
         intl.formatMessage({
-          id: 'EditListingPricingForm.priceRequired',
+          id: 'EditListingPricingForm.basicPriceRequired',
+        })
+      );
+      const premiumPriceRequired = validators.required(
+        intl.formatMessage({
+          id: 'EditListingPricingForm.premiumPriceRequired',
+        })
+      );
+      const standardPriceRequired = validators.required(
+        intl.formatMessage({
+          id: 'EditListingPricingForm.standardPriceRequired',
         })
       );
       const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
@@ -67,9 +97,18 @@ export const EditListingPricingFormComponent = props => (
         ),
         config.listingMinimumPriceSubUnits
       );
-      const priceValidators = config.listingMinimumPriceSubUnits
-        ? validators.composeValidators(priceRequired, minPriceRequired)
-        : priceRequired;
+
+      const basicPriceValidators = config.listingMinimumPriceSubUnits
+        ? validators.composeValidators(basicPriceRequired, minPriceRequired)
+        : basicPriceRequired;
+
+      const premiumPriceValidators = config.listingMinimumPriceSubUnits
+        ? validators.composeValidators(premiumPriceRequired, minPriceRequired)
+        : premiumPriceRequired;
+
+      const standardPriceValidators = config.listingMinimumPriceSubUnits
+        ? validators.composeValidators(standardPriceRequired, minPriceRequired)
+        : standardPriceRequired;
 
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
@@ -94,10 +133,28 @@ export const EditListingPricingFormComponent = props => (
             name="price"
             className={css.priceInput}
             autoFocus
-            label={pricePerUnitMessage}
+            label={basicPricePerUnitMessage}
             placeholder={pricePlaceholderMessage}
             currencyConfig={config.currencyConfig}
-            validate={priceValidators}
+            validate={basicPriceValidators}
+          />
+          <FieldCurrencyInput
+            id="premiumPrice"
+            name="premiumPrice"
+            className={css.priceInput}
+            label={premiumPricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={premiumPriceValidators}
+          />
+          <FieldCurrencyInput
+            id="standardPrice"
+            name="standardPrice"
+            className={css.priceInput}
+            label={standardPricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={standardPriceValidators}
           />
 
           <Button

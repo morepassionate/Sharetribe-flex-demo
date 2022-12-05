@@ -31,6 +31,7 @@ const EditListingPricingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { price } = currentListing.attributes;
+  console.log('price', price);
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -81,7 +82,6 @@ EditListingPricingPanel.defaultProps = {
 EditListingPricingPanel.propTypes = {
   className: string,
   rootClassName: string,
-
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 

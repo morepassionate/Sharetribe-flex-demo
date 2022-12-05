@@ -649,6 +649,7 @@ export const requestDeleteAvailabilityException = params => (dispatch, getState,
 // the data to the listing, and marks the tab updated so the UI can
 // display the state.
 export function requestUpdateListing(tab, data) {
+  console.log('edit listing duck', { tab, data });
   return (dispatch, getState, sdk) => {
     dispatch(updateListing(data));
     const { id } = data;

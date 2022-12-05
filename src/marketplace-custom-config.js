@@ -60,6 +60,38 @@ export const filters = [
       step: 5,
     },
   },
+  // {
+  //   id: 'premiumPrice',
+  //   label: 'Price',
+  //   type: 'PriceFilter',
+  //   group: 'primary',
+  //   // Note: PriceFilter is fixed filter,
+  //   // you can't change "queryParamNames: ['price'],"
+  //   queryParamNames: ['price'],
+  //   // Price filter configuration
+  //   // Note: unlike most prices this is not handled in subunits
+  //   config: {
+  //     min: 0,
+  //     max: 1000,
+  //     step: 5,
+  //   },
+  // },
+  // {
+  //   id: 'standardPrice',
+  //   label: 'Price',
+  //   type: 'PriceFilter',
+  //   group: 'primary',
+  //   // Note: PriceFilter is fixed filter,
+  //   // you can't change "queryParamNames: ['price'],"
+  //   queryParamNames: ['price'],
+  //   // Price filter configuration
+  //   // Note: unlike most prices this is not handled in subunits
+  //   config: {
+  //     min: 0,
+  //     max: 1000,
+  //     step: 5,
+  //   },
+  // },
   {
     id: 'keyword',
     label: 'Keyword',
