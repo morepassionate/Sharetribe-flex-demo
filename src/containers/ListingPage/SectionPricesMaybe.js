@@ -7,11 +7,13 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './ListingPage.module.css';
 import { formatMoney } from '../../util/currency';
+import { nightsBetween } from '../../util/dates';
 
 const { Money } = sdkTypes;
 
 const SectionPricesMaybe = props => {
   const { priceTitle, className, publicData, intl } = props;
+  // console.log('publicData', publicData);
   const classes = classNames(css.root, className);
 
   const priceData = (price, intl) => {
@@ -28,11 +30,17 @@ const SectionPricesMaybe = props => {
   };
 
   const { formattedPrice } = priceData(
-    new Money(publicData.premiumPrice.amount, publicData.premiumPrice.currency),
+    new Money(
+      publicData && publicData.premiumPrice ? publicData.premiumPrice.amount : 0,
+      publicData && publicData.premiumPrice ? publicData.premiumPrice.currency : 'USD'
+    ),
     intl
   );
   const { priceUnit } = priceData(
-    new Money(publicData.standardPrice.amount, publicData.standardPrice.currency),
+    new Money(
+      publicData && publicData.standardPrice ? publicData.standardPrice.amount : 0,
+      publicData && publicData.standardPrice ? publicData.standardPrice.currency : 'USD'
+    ),
     intl
   );
 
