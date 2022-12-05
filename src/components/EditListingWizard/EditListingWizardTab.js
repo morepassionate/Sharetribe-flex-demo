@@ -113,7 +113,6 @@ const EditListingWizardTab = props => {
       typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
     const updateValuesWithImages = { ...otherValues, ...imageProperty };
 
-    // console.log('tab', tab, 'updateVaules', updateValues, 'isNewURI', isNewURI, isNewListingFlow);
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
         ? (tab, updateValues) => onCreateListingDraft(updateValues)
@@ -125,7 +124,6 @@ const EditListingWizardTab = props => {
 
       onUpsertListingDraft(tab, upsertValues)
         .then(r => {
-          console.log({ r });
           if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
             handleCreateFlowTabScrolling(false);
@@ -137,7 +135,6 @@ const EditListingWizardTab = props => {
           }
         })
         .catch(e => {
-          console.log({ e });
           // No need for extra actions
         });
     } else {
@@ -228,9 +225,11 @@ const EditListingWizardTab = props => {
             const { price, premiumPrice, standardPrice } = values;
             const updatedValues = {
               price,
-              // publicData: { premiumPrice, standardPrice },
+              publicData: {
+                premiumPrice: { amount: premiumPrice.amount, currency: premiumPrice.currency },
+                standardPrice: { amount: standardPrice.amount, currency: standardPrice.currency },
+              },
             };
-            console.log('EditListingWizardTab values', updatedValues);
             onCompleteEditListingWizardTab(tab, updatedValues);
           }}
         />

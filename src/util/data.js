@@ -194,7 +194,6 @@ export const ensureOwnListing = listing => {
     attributes: { publicData: {} },
     images: [],
   };
-  console.log('listing', listing);
   return { ...empty, ...listing };
 };
 

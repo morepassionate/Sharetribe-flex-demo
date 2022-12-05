@@ -51,6 +51,7 @@ import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionPricesMaybe from './SectionPricesMaybe';
 import css from './ListingPage.module.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -457,23 +458,31 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-                <BookingPanel
-                  className={css.bookingPanel}
-                  listing={currentListing}
-                  isOwnListing={isOwnListing}
-                  unitType={unitType}
-                  onSubmit={handleBookingSubmit}
-                  title={bookingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
-                  onFetchTransactionLineItems={onFetchTransactionLineItems}
-                  lineItems={lineItems}
-                  fetchLineItemsInProgress={fetchLineItemsInProgress}
-                  fetchLineItemsError={fetchLineItemsError}
-                />
+                <div>
+                  <SectionPricesMaybe
+                    className={css.sectionPricesMaybePanel}
+                    publicData={publicData}
+                    priceTitle={priceTitle}
+                    intl={intl}
+                  ></SectionPricesMaybe>
+                  <BookingPanel
+                    className={css.bookingPanel}
+                    listing={currentListing}
+                    isOwnListing={isOwnListing}
+                    unitType={unitType}
+                    onSubmit={handleBookingSubmit}
+                    title={bookingTitle}
+                    subTitle={bookingSubTitle}
+                    authorDisplayName={authorDisplayName}
+                    onManageDisableScrolling={onManageDisableScrolling}
+                    timeSlots={timeSlots}
+                    fetchTimeSlotsError={fetchTimeSlotsError}
+                    onFetchTransactionLineItems={onFetchTransactionLineItems}
+                    lineItems={lineItems}
+                    fetchLineItemsInProgress={fetchLineItemsInProgress}
+                    fetchLineItemsError={fetchLineItemsError}
+                  />
+                </div>
               </div>
             </div>
           </LayoutWrapperMain>

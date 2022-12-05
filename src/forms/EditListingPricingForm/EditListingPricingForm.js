@@ -139,15 +139,6 @@ export const EditListingPricingFormComponent = props => (
             validate={basicPriceValidators}
           />
           <FieldCurrencyInput
-            id="premiumPrice"
-            name="premiumPrice"
-            className={css.priceInput}
-            label={premiumPricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            validate={premiumPriceValidators}
-          />
-          <FieldCurrencyInput
             id="standardPrice"
             name="standardPrice"
             className={css.priceInput}
@@ -155,6 +146,15 @@ export const EditListingPricingFormComponent = props => (
             placeholder={pricePlaceholderMessage}
             currencyConfig={config.currencyConfig}
             validate={standardPriceValidators}
+          />
+          <FieldCurrencyInput
+            id="premiumPrice"
+            name="premiumPrice"
+            className={css.priceInput}
+            label={premiumPricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={premiumPriceValidators}
           />
 
           <Button
