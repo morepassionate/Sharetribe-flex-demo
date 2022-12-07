@@ -242,7 +242,6 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
-    console.log('currentListing.attributes', currentListing);
 
     const richTitle = (
       <span>
